@@ -11,8 +11,8 @@ import io
 #from pycaret.regression import setup, compare_models, pull, save_model, load_model
 import os
 
-openai.api_key= st.secrets["OPENAI"]["OPENAI_API_KEY"]
-client = OpenAI(api_key=openai.api_key)
+api_key = st.secrets["OPENAI"]["OPENAI_API_KEY"]
+client = openai.OpenAI(api_key=api_key)
 # device = torch.device('mps') if torch.backends.mps.is_available() else torch.device("cpu")
 # model_name = "GPT-2"  # Replace with a larger model like "EleutherAI/gpt-neo-1.3B"
 # tokenizer = AutoTokenizer.from_pretrained(model_name)
@@ -490,7 +490,7 @@ elif selected == 'Data Visualization':
                     prompt += "Provide insights, patterns, or trends observed in the chart."
 
                     # GPT API call
-                    response = client.ChatCompletion.create(
+                    response = client.chat.completions.create(
                         model="gpt-3.5-turbo",
                         messages=[
                             {"role": "system", "content": "You are a data Visualization expert in interpreting plots and drawing conclusions from the data & plot."},
